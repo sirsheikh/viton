@@ -1,5 +1,4 @@
 ﻿certifi==2021.5.30
-cupy==6.0.0
 dj-database-url==0.5.0
 Django==2.2.5
 django-heroku==0.3.1
