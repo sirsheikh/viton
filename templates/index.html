@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head >
+	<title>VTON try</title>
+
+  <style>
+    .button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+</style>
+	
+</head>
+<body>
+<form  method="post" action="{% url 'result' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+<input id="uploadImage" class="button" type="file" name="myPhoto" onchange="PreviewImage();" />
+<img id="uploadPreview" style="width: 400px; height: 500px;" />
+
+<select id="dlist" name="dress" class="button" onChange="swapImage()">
+<option value="{% static 'images/a.jpg'%}">DressA</option>
+<option value="{% static 'images/b.jpg'%}">DressB</option>
+<option value="{% static 'images/c.jpg'%}">DressC</option>
+<option value="{% static 'images/014396_1.jpg'%}">DressD</option>
+</select>
+
+<img id="imageToSwap" name="dressS"src="{% static 'images/a.jpg'%}" style="width: 200px; height: 300px;" />
+
+<img id="ResultView" style="width: 400px; height: 500px;" />
+
+
+
+    
+<!--<input  id="uploadImage12"  type="file" name="myPhoto2" />-->
+<button type="submit"id="result1" class="button">show result</button>
+
+
+    
+</form>
+
+<!--<button type="button" class="button" id="resultbutton" onclick="ResultPreview();">Result</button>-->
+<!--<script type="text/javascript" src="{%static 'scripts/require.js'%}"></script>-->
+<script  type="text/javascript" > 
+    
+    function PreviewImage() {
+        //var fs =require('fs');
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("uploadPreview").src = oFREvent.target.result;
+            //fs.writeFile("dataset/test_img/ig.jpg",oFREvent.target.result,'binary')
+        };
+
+    };
+
+    function swapImage(){
+        
+      	var image = document.getElementById("imageToSwap");
+      	var dropd = document.getElementById("dlist");
+        
+      	image.src = dropd.value;	
+        };
+
+	function ResultPreview() {
+
+        var resultimage = document.getElementById("ResultView");
+        
+        
+        var oFReader2 = new FileReader();
+        oFReader2.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+        oFReader2.onload = function (oFREvent) {
+            //alert(oFREvent.target.result);       
+            document.getElementById("ResultView").src = oFREvent.target.result;
+
+        };
+    };
+
+</script>
+
+</body>
+</html>
+<head></head>

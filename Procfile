@@ -1,0 +1,1 @@
+web: gunicorn vitonWeb.wsgi
